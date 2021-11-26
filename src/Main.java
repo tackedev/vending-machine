@@ -9,6 +9,8 @@ import view.ProductSelectingView;
 import view.View;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 
 /**
  * @author tackedev
@@ -20,8 +22,6 @@ public class Main {
         Service productSelectingService = new ProductSelectingService();
         View productSelectingView = new ProductSelectingView();
         Controller productSelectingController = new ProductSelectingController(productSelectingService, productSelectingView);
-
-
 
         Service cashInsertingService = new CashInsertingService();
         View cashInsertingView = new CashInsertingView();
