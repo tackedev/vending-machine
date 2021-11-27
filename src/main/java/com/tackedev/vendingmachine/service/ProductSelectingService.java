@@ -29,7 +29,8 @@ public class ProductSelectingService implements Service {
     public void execute(char input) throws CanceledRequestException, FinishedStepException {
 
         switch (input) {
-            case 'c': case 'C':
+            case 'c':
+            case 'C':
                 throw new CanceledRequestException();
             default:
                 int inputValue = Character.digit(input, 10);
@@ -44,7 +45,10 @@ public class ProductSelectingService implements Service {
                         if (streakSelectedProduct.getStreak() == Award.getStreak()) {
                             double randomNum = Math.random() * 100;
                             if (randomNum <= Award.getRate()) {
-                                award.setGiven(true);
+                                // check still remain budget
+                                if (streakSelectedProduct.isEnoughBudget()) {
+                                    award.setGiven(true);
+                                }
                             }
 
                             streakSelectedProduct.reset();
