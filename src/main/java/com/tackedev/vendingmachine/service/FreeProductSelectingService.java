@@ -1,9 +1,8 @@
 package com.tackedev.vendingmachine.service;
 
-import com.tackedev.vendingmachine.dto.Award;
 import com.tackedev.vendingmachine.dto.Product;
 import com.tackedev.vendingmachine.dto.ProductStorage;
-import com.tackedev.vendingmachine.dto.StreakSelectedProduct;
+import com.tackedev.vendingmachine.dto.AwardStatus;
 import com.tackedev.vendingmachine.util.NumberFormatter;
 
 import java.io.IOException;
@@ -14,21 +13,19 @@ import java.io.IOException;
 public class FreeProductSelectingService implements Service {
 
     private final ProductStorage productStorage;
-    private final Award award;
-    private final StreakSelectedProduct streakSelectedProduct;
+    private final AwardStatus awardStatus;
 
     public FreeProductSelectingService() throws IOException {
         productStorage = ProductStorage.getInstance();
-        award = Award.getInstance();
-        streakSelectedProduct = StreakSelectedProduct.getInstance();
+        awardStatus = AwardStatus.getInstance();
     }
-
-
+    
     @Override
     public void execute(char input) throws CanceledRequestException, FinishedStepException {
 
         switch (input) {
-            case 'c': case 'C':
+            case 'c':
+            case 'C':
                 throw new CanceledRequestException();
             default:
                 int inputValue = Character.digit(input, 10);
@@ -36,14 +33,14 @@ public class FreeProductSelectingService implements Service {
                 if (1 <= inputValue && inputValue <= productStorage.size()) {
                     Product selectedProduct = productStorage.get(inputValue - 1);
 
-                    if (streakSelectedProduct.getRemainBudget() >= selectedProduct.getPrice()) {
+                    if (awardStatus.getRemainBudget() >= selectedProduct.getPrice()) {
                         // if remain budget is enough for this product
-                        award.setGiven(false);
-                        streakSelectedProduct.updateRemainBudge(selectedProduct);
+                        awardStatus.setGiven(false);
+                        awardStatus.updateRemainBudge(selectedProduct);
                         throw new FinishedStepException(selectedProduct);
                     } else {
                         throw new FinishedStepException("Cannot select this product. The remain program's budget is " +
-                                NumberFormatter.formatToVND(streakSelectedProduct.getRemainBudget()));
+                                NumberFormatter.formatToVND(awardStatus.getRemainBudget()));
                     }
                 }
         }

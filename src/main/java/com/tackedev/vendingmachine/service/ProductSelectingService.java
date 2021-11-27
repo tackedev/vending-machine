@@ -1,10 +1,10 @@
 package com.tackedev.vendingmachine.service;
 
-import com.tackedev.vendingmachine.dto.Award;
+import com.tackedev.vendingmachine.config.AwardConfig;
 import com.tackedev.vendingmachine.dto.Cash;
 import com.tackedev.vendingmachine.dto.Product;
 import com.tackedev.vendingmachine.dto.ProductStorage;
-import com.tackedev.vendingmachine.dto.StreakSelectedProduct;
+import com.tackedev.vendingmachine.dto.AwardStatus;
 
 import java.io.IOException;
 
@@ -15,14 +15,12 @@ public class ProductSelectingService implements Service {
 
     private final Cash currentCash;
     private final ProductStorage productStorage;
-    private final StreakSelectedProduct streakSelectedProduct;
-    private final Award award;
+    private final AwardStatus awardStatus;
 
     public ProductSelectingService() throws IOException {
         currentCash = Cash.getInstance();
         productStorage = ProductStorage.getInstance();
-        streakSelectedProduct = StreakSelectedProduct.getInstance();
-        award = Award.getInstance();
+        awardStatus = AwardStatus.getInstance();
     }
 
     @Override
@@ -39,19 +37,19 @@ public class ProductSelectingService implements Service {
                     Product selectedProduct = productStorage.get(inputValue - 1);
                     if (currentCash.getAmount() >= selectedProduct.getPrice()) {
                         // update streak selected product
-                        streakSelectedProduct.updateStreak(selectedProduct);
+                        awardStatus.updateStreak(selectedProduct);
 
                         // check given free product
-                        if (streakSelectedProduct.getStreak() == Award.getStreak()) {
+                        if (awardStatus.getStreak() == AwardConfig.getStreak()) {
                             double randomNum = Math.random() * 100;
-                            if (randomNum <= Award.getRate()) {
+                            if (randomNum <= AwardConfig.getRate()) {
                                 // check still remain budget
-                                if (streakSelectedProduct.isEnoughBudget()) {
-                                    award.setGiven(true);
+                                if (awardStatus.isEnoughBudget()) {
+                                    awardStatus.setGiven(true);
                                 }
                             }
 
-                            streakSelectedProduct.reset();
+                            awardStatus.reset();
                         }
 
                         // update current cash

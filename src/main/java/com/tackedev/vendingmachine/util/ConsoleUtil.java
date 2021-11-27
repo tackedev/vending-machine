@@ -1,31 +1,23 @@
 package com.tackedev.vendingmachine.util;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
  * @author tackedev
  */
-public class  ConsoleUtil {
-
-    public static final String OS_NAME = System.getProperty("os.name");
+public class ConsoleUtil {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
     private ConsoleUtil() {
     }
 
-    public static void clearConsole() throws IOException {
-        /*if (OS_NAME.contains("Windows")) {
-            Runtime.getRuntime().exec("cls");
-        } else {
-            Runtime.getRuntime().exec("clear");
-        }*/
+    public static void clearConsole() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    public static char getChar(String message, char... acceptedValues) throws IOException {
+    public static char getChar(String message, char... acceptedValues) {
         char result = '\u0000';
         String input;
 

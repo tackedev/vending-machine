@@ -1,6 +1,6 @@
 package com.tackedev.vendingmachine.view;
 
-import com.tackedev.vendingmachine.dto.Award;
+import com.tackedev.vendingmachine.dto.AwardStatus;
 import com.tackedev.vendingmachine.dto.Cash;
 import com.tackedev.vendingmachine.dto.Product;
 import com.tackedev.vendingmachine.dto.ProductStorage;
@@ -18,34 +18,34 @@ public class ProductSelectingView implements View {
 
     private final ProductStorage productStorage;
     private final Cash currentCash;
-    private final Award award;
+    private final AwardStatus awardStatus;
 
     public ProductSelectingView() throws IOException {
         productStorage = ProductStorage.getInstance();
         currentCash = Cash.getInstance();
-        award = Award.getInstance();
+        awardStatus = AwardStatus.getInstance();
     }
 
     @Override
-    public void showMenu() throws IOException {
+    public void showMenu() {
         ConsoleUtil.clearConsole();
         System.out.println("----- SELECT PRODUCT -----");
 
         for (int i = 0; i < productStorage.size(); i++) {
-            System.out.printf("%2d: %-10s %s.\n", i+1, productStorage.get(i).getName(),
+            System.out.printf("%2d: %-10s %s.\n", i + 1, productStorage.get(i).getName(),
                     NumberFormatter.formatToVND(productStorage.get(i).getPrice()));
         }
 
         System.out.println("--------------------------");
 
         System.out.println("Current cash: " + NumberFormatter.formatToVND(currentCash.getAmount()));
-        if (award.isGiven()) {
+        if (awardStatus.isGiven()) {
             System.out.println("You are given a free any product!");
         }
     }
 
     @Override
-    public void cancel(CanceledRequestException ex) throws IOException {
+    public void cancel(CanceledRequestException ex) {
         throw new UnsupportedOperationException();
     }
 

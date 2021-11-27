@@ -9,8 +9,7 @@ public enum Money {
     TWENTY_THOUSAND_VND(20_000),
     FIFTY_THOUSAND_VND(50_000),
     ONE_HUNDRED_THOUSAND_VND(100_000),
-    TWO_HUNDRED_THOUSAND_VND(200_000)
-    ;
+    TWO_HUNDRED_THOUSAND_VND(200_000);
 
     private final int value;
 

@@ -1,3 +1,4 @@
+com/tackedev/vendingmachine/config/AwardConfig.class
 com/tackedev/vendingmachine/service/ProductSelectingService.class
 com/tackedev/vendingmachine/util/NumberFormatter.class
 com/tackedev/vendingmachine/util/ConsoleUtil.class
@@ -10,12 +11,11 @@ com/tackedev/vendingmachine/service/Service.class
 com/tackedev/vendingmachine/dto/Cash.class
 com/tackedev/vendingmachine/controller/CashInsertingController.class
 com/tackedev/vendingmachine/service/FinishedStepException.class
-com/tackedev/vendingmachine/dto/Award.class
-com/tackedev/vendingmachine/dto/StreakSelectedProduct.class
 com/tackedev/vendingmachine/service/CanceledRequestException.class
 com/tackedev/vendingmachine/dto/Product.class
 com/tackedev/vendingmachine/dto/ProductStorage.class
 com/tackedev/vendingmachine/view/ProductSelectingView.class
 com/tackedev/vendingmachine/view/CashInsertingView.class
+com/tackedev/vendingmachine/dto/AwardStatus.class
 com/tackedev/vendingmachine/controller/Controller.class
 com/tackedev/vendingmachine/controller/ProductSelectingController.class

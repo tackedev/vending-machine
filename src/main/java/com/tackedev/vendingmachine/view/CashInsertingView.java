@@ -15,7 +15,7 @@ import java.io.IOException;
 public class CashInsertingView implements View {
 
     @Override
-    public void showMenu() throws IOException {
+    public void showMenu() {
         ConsoleUtil.clearConsole();
         System.out.println(
                 "----- INSERT CASH -----\n" +

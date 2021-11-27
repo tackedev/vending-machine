@@ -33,10 +33,12 @@ public class CashInsertingService implements Service {
             case '5':
                 currentCash.increaseAmount(Money.TWO_HUNDRED_THOUSAND_VND.getValue());
                 break;
-            case 'c': case 'C':
+            case 'c':
+            case 'C':
                 int refundCash = currentCash.refund();
                 throw new CanceledRequestException(refundCash);
-            case 'n': case 'N':
+            case 'n':
+            case 'N':
                 throw new FinishedStepException();
         }
 

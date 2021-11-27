@@ -1,4 +1,4 @@
-package com.tackedev.vendingmachine.dto;
+package com.tackedev.vendingmachine.config;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -7,33 +7,20 @@ import java.util.Properties;
 /**
  * @author tackedev
  */
-public class Award {
+public class AwardConfig {
 
-    private boolean isGiven;
-
-    private static final String PATH = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+    private static final String PATH;
     private static final String FILENAME = "award.properties";
     private static final Properties PROPERTIES;
 
-    private static Award instance;
-
     static {
+        PATH = Thread.currentThread().getContextClassLoader().getResource("").getPath();
         PROPERTIES = new Properties();
         try {
             PROPERTIES.load(new FileInputStream(PATH + FILENAME));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-    private Award() {
-    }
-
-    public static Award getInstance() {
-        if (instance == null) {
-            instance = new Award();
-        }
-        return instance;
     }
 
     public static int getStreak() {
@@ -52,11 +39,4 @@ public class Award {
         return Integer.parseInt(PROPERTIES.getProperty("budget"));
     }
 
-    public boolean isGiven() {
-        return isGiven;
-    }
-
-    public void setGiven(boolean given) {
-        isGiven = given;
-    }
 }

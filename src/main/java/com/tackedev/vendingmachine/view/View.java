@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public interface View {
 
-    void showMenu() throws IOException;
+    void showMenu();
 
     void cancel(CanceledRequestException ex) throws IOException;
 

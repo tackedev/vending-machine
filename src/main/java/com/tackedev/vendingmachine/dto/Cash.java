@@ -20,14 +20,6 @@ public class Cash {
         return instance;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
     public void increaseAmount(int cash) {
         this.amount += cash;
     }
@@ -40,5 +32,13 @@ public class Cash {
         int result = this.amount;
         this.amount = 0;
         return result;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

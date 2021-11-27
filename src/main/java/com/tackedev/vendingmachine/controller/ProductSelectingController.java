@@ -1,6 +1,6 @@
 package com.tackedev.vendingmachine.controller;
 
-import com.tackedev.vendingmachine.dto.Award;
+import com.tackedev.vendingmachine.dto.AwardStatus;
 import com.tackedev.vendingmachine.dto.ProductStorage;
 import com.tackedev.vendingmachine.service.CanceledRequestException;
 import com.tackedev.vendingmachine.service.FinishedStepException;
@@ -20,7 +20,7 @@ public class ProductSelectingController implements Controller {
     private final View view;
 
     private ProductStorage productStorage;
-    private Award award;
+    private AwardStatus awardStatus;
 
     public ProductSelectingController(Service service, Service freeProductSelectingService, View view) throws IOException {
         this.service = service;
@@ -28,7 +28,7 @@ public class ProductSelectingController implements Controller {
         this.view = view;
 
         productStorage = ProductStorage.getInstance();
-        award = Award.getInstance();
+        awardStatus = AwardStatus.getInstance();
     }
 
     @Override
@@ -36,14 +36,15 @@ public class ProductSelectingController implements Controller {
         view.showMenu();
 
         char[] acceptedValues = new char[productStorage.size() + 2];
-        acceptedValues[0] = 'C'; acceptedValues[1] = 'c';
+        acceptedValues[0] = 'C';
+        acceptedValues[1] = 'c';
         for (int i = 0; i < productStorage.size(); i++) {
-            acceptedValues[2 + i] = Character.forDigit(i+1, 10);
+            acceptedValues[2 + i] = Character.forDigit(i + 1, 10);
         }
         char input = ConsoleUtil.getChar("Input the number (C=Cancel): ", acceptedValues);
 
         try {
-            if (award.isGiven()) {
+            if (awardStatus.isGiven()) {
                 freeProductSelectingService.execute(input);
             } else {
                 service.execute(input);
