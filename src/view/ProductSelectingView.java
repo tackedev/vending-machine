@@ -1,6 +1,5 @@
 package view;
 
-import dto.Cart;
 import dto.Cash;
 import dto.Product;
 import dto.ProductStorage;
@@ -10,7 +9,6 @@ import util.ConsoleUtil;
 import util.NumberFormatter;
 
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * @author tackedev
@@ -18,11 +16,11 @@ import java.util.Map;
 public class ProductSelectingView implements View {
 
     private final ProductStorage productStorage;
-    private final Cart currentCart;
+    private final Cash currentCash;
 
     public ProductSelectingView() throws IOException {
         productStorage = ProductStorage.getInstance();
-        currentCart = Cart.getInstance();
+        currentCash = Cash.getInstance();
     }
 
     @Override
@@ -37,9 +35,7 @@ public class ProductSelectingView implements View {
 
         System.out.println("--------------------------");
 
-        System.out.print("Current cash: " + NumberFormatter.formatToVND(Cash.getInstance().getAmount()));
-        System.out.print(" | ");
-        System.out.println("Total: " + NumberFormatter.formatToVND(currentCart.getTotal()));
+        System.out.println("Current cash: " + NumberFormatter.formatToVND(currentCash.getAmount()));
     }
 
     @Override
@@ -55,16 +51,10 @@ public class ProductSelectingView implements View {
         if (ex.getMessage() != null) {
             System.out.println(ex.getMessage());
         } else {
-            Map<Product, Integer> buyedProducts = ex.getPayInfo().getBuyedProducts();
+            Product selectedProduct = ex.getSelectedProduct();
 
-            System.out.println("Your items: ");
-            System.out.println("  Item    Count   Total");
-
-            for (var item : buyedProducts.entrySet()) {
-                System.out.format("- %-10s %2d %s\n", item.getKey().getName(), item.getValue(),
-                        NumberFormatter.formatToVND(item.getKey().getPrice() * item.getValue()));
-            }
-            System.out.println("Your refund money: " + NumberFormatter.formatToVND((ex.getPayInfo().getRefundAmount())));
+            System.out.println("Your item: " + selectedProduct.getName());
+            System.out.println("Your refund money: " + NumberFormatter.formatToVND((currentCash.getAmount())));
         }
 
         System.out.println("------------------");

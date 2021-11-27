@@ -1,26 +1,26 @@
 package service;
 
-import dto.PayInfo;
+import dto.Product;
 
 /**
  * @author tackedev
  */
 public class FinishedStepException extends Exception {
 
-    private PayInfo payInfo;
+    private Product selectedProduct;
 
     public FinishedStepException() {
     }
 
-    public FinishedStepException(PayInfo payInfo) {
-        this.payInfo = payInfo;
+    public FinishedStepException(Product selectedProduct) {
+        this.selectedProduct = selectedProduct;
     }
 
     public FinishedStepException(String message) {
         super(message);
     }
 
-    public PayInfo getPayInfo() {
-        return payInfo;
+    public Product getSelectedProduct() {
+        return selectedProduct;
     }
 }

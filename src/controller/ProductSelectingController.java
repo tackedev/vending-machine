@@ -30,19 +30,17 @@ public class ProductSelectingController implements Controller {
     public void process() throws IOException, FinishedStepException, CanceledRequestException {
         view.showMenu();
 
-        char[] acceptedValues = new char[productStorage.size() + 4];
-        acceptedValues[0] = 'P'; acceptedValues[1] = 'p';
-        acceptedValues[2] = 'C'; acceptedValues[3] = 'c';
+        char[] acceptedValues = new char[productStorage.size() + 2];
+        acceptedValues[0] = 'C'; acceptedValues[1] = 'c';
         for (int i = 0; i < productStorage.size(); i++) {
-            acceptedValues[4 + i] = Character.forDigit(i+1, 10);
+            acceptedValues[2 + i] = Character.forDigit(i+1, 10);
         }
-        char input = ConsoleUtil.getChar("Input the number (P=Pay | C=Cancel): ", acceptedValues);
+        char input = ConsoleUtil.getChar("Input the number (C=Cancel): ", acceptedValues);
 
         try {
             service.execute(input);
         } catch (FinishedStepException ex) {
             view.showResult(ex);
-            throw ex;
         }
     }
 }
