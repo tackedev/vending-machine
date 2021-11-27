@@ -5,11 +5,16 @@ package service;
  */
 public class CanceledRequestException extends Exception {
 
+    private int refundCash;
+
     public CanceledRequestException() {
     }
 
-    public CanceledRequestException(String message) {
-        super(message);
+    public CanceledRequestException(int refundCash) {
+        this.refundCash = refundCash;
     }
 
+    public int getRefundCash() {
+        return refundCash;
+    }
 }

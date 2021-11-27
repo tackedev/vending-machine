@@ -1,7 +1,5 @@
 package service;
 
-import dto.Wallet;
-
 /**
  * @author tackedev
  */

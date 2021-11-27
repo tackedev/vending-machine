@@ -6,13 +6,13 @@ import java.util.Scanner;
 /**
  * @author tackedev
  */
-public class IOUtil {
+public class  ConsoleUtil {
 
     public static final String OS_NAME = System.getProperty("os.name");
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    private IOUtil() {
+    private ConsoleUtil() {
     }
 
     public static void clearConsole() throws IOException {

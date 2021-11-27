@@ -3,7 +3,7 @@ package controller;
 import service.CanceledRequestException;
 import service.FinishedStepException;
 import service.Service;
-import util.IOUtil;
+import util.ConsoleUtil;
 import view.View;
 
 import java.io.IOException;
@@ -25,18 +25,23 @@ public class CashInsertingController implements Controller {
 
     @Override
     public void process() throws IOException {
-
         view.showMenu();
 
-        char input = IOUtil.getChar("Input the number (C=Cancel | N=Next): ",
+        char input = ConsoleUtil.getChar("Input the number (C=Cancel | N=Next): ",
                 '1', '2', '3', '4', '5', 'C', 'c', 'N', 'n');
 
         try {
             service.execute(input);
         } catch (CanceledRequestException ex) {
-            view.cancel();
+            view.cancel(ex);
         } catch (FinishedStepException ex) {
-            nextController.process();
+            while (true) {
+                try {
+                    nextController.process();
+                } catch (CanceledRequestException | FinishedStepException exception) {
+                    break;
+                }
+            }
         }
     }
 

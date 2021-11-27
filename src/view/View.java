@@ -1,5 +1,8 @@
 package view;
 
+import service.CanceledRequestException;
+import service.FinishedStepException;
+
 import java.io.IOException;
 
 /**
@@ -9,7 +12,7 @@ public interface View {
 
     void showMenu() throws IOException;
 
-    void cancel();
+    void cancel(CanceledRequestException ex) throws IOException;
 
-    void showResult();
+    void showResult(FinishedStepException ex) throws IOException;
 }

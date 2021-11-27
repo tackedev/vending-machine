@@ -1,37 +1,42 @@
 package service;
 
 import dto.Money;
-import dto.Wallet;
+import dto.Cash;
 
 /**
  * @author tackedev
  */
 public class CashInsertingService implements Service {
 
+    private final Cash currentCash;
+
+    public CashInsertingService() {
+        currentCash = Cash.getInstance();
+    }
+
     @Override
     public void execute(char input) throws CanceledRequestException, FinishedStepException {
 
         switch (input) {
             case '1':
-                Wallet.amount += Money.TEN_THOUSAND_VND.getValue();
+                currentCash.increaseAmount(Money.TEN_THOUSAND_VND.getValue());
                 break;
             case '2':
-                Wallet.amount += Money.TWENTY_THOUSAND_VND.getValue();
+                currentCash.increaseAmount(Money.TWENTY_THOUSAND_VND.getValue());
                 break;
             case '3':
-                Wallet.amount += Money.FIFTY_THOUSAND_VND.getValue();
+                currentCash.increaseAmount(Money.FIFTY_THOUSAND_VND.getValue());
                 break;
             case '4':
-                Wallet.amount += Money.ONE_HUNDRED_THOUSAND_VND.getValue();
+                currentCash.increaseAmount(Money.ONE_HUNDRED_THOUSAND_VND.getValue());
                 break;
             case '5':
-                Wallet.amount += Money.TWO_HUNDRED_THOUSAND_VND.getValue();
+                currentCash.increaseAmount(Money.TWO_HUNDRED_THOUSAND_VND.getValue());
                 break;
-            case 'c':
-            case 'C':
-                throw new CanceledRequestException();
-            case 'n':
-            case 'N':
+            case 'c': case 'C':
+                int refundCash = currentCash.refund();
+                throw new CanceledRequestException(refundCash);
+            case 'n': case 'N':
                 throw new FinishedStepException();
         }
 
