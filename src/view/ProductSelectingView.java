@@ -27,7 +27,6 @@ public class ProductSelectingView implements View {
 
     @Override
     public void showMenu() throws IOException {
-
         ConsoleUtil.clearConsole();
         System.out.println("----- SELECT PRODUCT -----");
 
@@ -50,6 +49,7 @@ public class ProductSelectingView implements View {
 
     @Override
     public void showResult(FinishedStepException ex) throws IOException {
+        ConsoleUtil.clearConsole();
         System.out.println("----- RESULT -----");
 
         if (ex.getMessage() != null) {

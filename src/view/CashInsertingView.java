@@ -31,6 +31,7 @@ public class CashInsertingView implements View {
 
     @Override
     public void cancel(CanceledRequestException ex) throws IOException {
+        ConsoleUtil.clearConsole();
         System.out.println("Refund cash: " + NumberFormatter.formatToVND(ex.getRefundCash()));
         System.out.print("Press any key to continue...");
         System.in.read();
