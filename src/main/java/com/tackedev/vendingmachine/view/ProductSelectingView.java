@@ -1,5 +1,6 @@
 package com.tackedev.vendingmachine.view;
 
+import com.tackedev.vendingmachine.dto.Award;
 import com.tackedev.vendingmachine.dto.Cash;
 import com.tackedev.vendingmachine.dto.Product;
 import com.tackedev.vendingmachine.dto.ProductStorage;
@@ -17,10 +18,12 @@ public class ProductSelectingView implements View {
 
     private final ProductStorage productStorage;
     private final Cash currentCash;
+    private final Award award;
 
     public ProductSelectingView() throws IOException {
         productStorage = ProductStorage.getInstance();
         currentCash = Cash.getInstance();
+        award = Award.getInstance();
     }
 
     @Override
@@ -36,6 +39,9 @@ public class ProductSelectingView implements View {
         System.out.println("--------------------------");
 
         System.out.println("Current cash: " + NumberFormatter.formatToVND(currentCash.getAmount()));
+        if (award.isGiven()) {
+            System.out.println("You are given a free any product!");
+        }
     }
 
     @Override

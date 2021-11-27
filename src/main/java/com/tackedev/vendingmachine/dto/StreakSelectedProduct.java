@@ -8,12 +8,16 @@ public class StreakSelectedProduct {
     private Product oldProduct;
     private int streak;
 
-    public StreakSelectedProduct() {
+    private static StreakSelectedProduct instance;
+
+    private StreakSelectedProduct() {
     }
 
-    public StreakSelectedProduct(Product oldProduct, int streak) {
-        this.oldProduct = oldProduct;
-        this.streak = streak;
+    public static StreakSelectedProduct getInstance() {
+        if (instance == null) {
+            instance = new StreakSelectedProduct();
+        }
+        return instance;
     }
 
     public Product getOldProduct() {
@@ -31,4 +35,19 @@ public class StreakSelectedProduct {
     public void setStreak(int streak) {
         this.streak = streak;
     }
+
+    public void updateStreak(Product newProduct) {
+        if (this.oldProduct == null || !this.oldProduct.equals(newProduct)) {
+            this.oldProduct = newProduct;
+            this.streak = 1;
+        } else {
+            this.streak++;
+        }
+    }
+
+    public void reset() {
+        this.oldProduct = null;
+        this.streak = 0;
+    }
+
 }
