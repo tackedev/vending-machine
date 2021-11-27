@@ -16,11 +16,13 @@ public class  ConsoleUtil {
     }
 
     public static void clearConsole() throws IOException {
-        if (OS_NAME.contains("Windows")) {
+        /*if (OS_NAME.contains("Windows")) {
             Runtime.getRuntime().exec("cls");
         } else {
             Runtime.getRuntime().exec("clear");
-        }
+        }*/
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 
     public static char getChar(String message, char... acceptedValues) throws IOException {

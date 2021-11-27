@@ -64,7 +64,7 @@ public class ProductSelectingView implements View {
                 System.out.format("- %-10s %2d %s\n", item.getKey().getName(), item.getValue(),
                         NumberFormatter.formatToVND(item.getKey().getPrice() * item.getValue()));
             }
-            System.out.println("Your refund money: " + ex.getPayInfo().getRefundAmount());
+            System.out.println("Your refund money: " + NumberFormatter.formatToVND((ex.getPayInfo().getRefundAmount())));
         }
 
         System.out.println("------------------");
